@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewpoint" content="width = device-width", initial-scale="1.0">
+      <title>ajax</title>
+   </head>
+   <body> 
+
+   </body>
+   <!-- <script>
+    //ajax 요청 객체 생성
+    let request = new XMLHttpRequest() ;
+    //요청을 준비
+    request.open('GET', "../example/books/")
+    //요청 - 데이터가 없는 경우는 따옴표를 대입
+    request.send('')
+    //서버에서 요청이 전송되는 호출될 콜백 메서드를 등록
+    request.addEventListener('load', function(e){
+      //데이터를 확인 : 텍스트와 JSON은 responseTest
+      //XML인 경우는 responseXML
+      alert(request.responseText);
+
+      // 받아온 문자열을 Javascript 객체로 변환
+      let data = JSON.parse(request.responseText);
+
+      //자바스크립트는 for ~ in으로 배열을 순회하면 인덱스가 리턴됩니다.
+      for (idx in data) {
+        alert(data[idx].bid + data[idx].title + data[idx].price)
+      }
+    })
+   </script>
+   <div id="display"></div>
+   <script>
+    //ajax 요청 객체 생성
+    let request = new XMLHttpRequest();
+
+    //POST 방식에서 전송할 데이터를 생성
+    let formdata = new FormData();
+    formdata.append('bid', 4);
+    formdata.append('title', '데미안');
+    formdata.append('author', '카뮈');
+    formdata.append('publisheddate', '1900-00-00');
+    formdata.append('price', 10000);
+    
+    //요청을 준비하고 전송
+    request.open("POST", "../example/books/");
+
+    //데이터 변환
+    request.setRequestHeader('Content-type',
+      'application/x-www-from-urlencoded') ;
+    let param = "";
+    for(let pair of formdata.entries()) {
+      param += pair[0] + '=' + pair[1] + '&';
+    }
+    request.send(param) ;
+    
+    request.addEventListener("load", function(e){
+      alert(request.response.Text)
+    });
+   </script> -->
+   <div></div>
+    <script>
+    //첫번째 then에서는 어떤 데이터인지만 알려주면 파싱을 해서 다음 then에게 넘겨줍니다.
+    //다음 then에서 data를 사용하면 됩니다.
+    //여러개의 문장을 수행해야하는 경우 { }로 감싸면 됩니다.
+    //예외에 대한 처리는 catch로 수행 할 수 있고 catch의 매개 변수는 예외 객체입니다.
+    fetch("../example/books/")
+    .then((response) => response.json())
+    .then((data) => console.log(data)) 
+    .catch((error) => console.log(error));
+    </script>
+    
+    <script src="https://cdn.jsdeliver.net/npm/axios/dist/axios/min/js"></script>
+    <script>
+      axios.get("../example/books/")
+      .then((response) => console.log(response.data)) 
+      .catch((error) => console.log(error));
+    </script>
+</html>
